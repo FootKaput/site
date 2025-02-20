@@ -45,7 +45,47 @@ const gameData = {
                     { text: "Call Out for Your Tail", nextScene: 12 }
                 ]
             },
-            // Additional scenes as needed...
+            // Scene 4
+            {
+                text: "You dance joyfully with the stars, feeling their warmth and sparkle.",
+                image: 'images/dancing-stars.jpg',
+                choices: [
+                    { text: "Ask the Stars About Your Tail", nextScene: 13 },
+                    { text: "Thank Them and Move On", nextScene: 5 },
+                    { text: "Invite Them to Join You", nextScene: 14 }
+                ]
+            },
+            // Scene 5
+            {
+                text: "You keep following the stars, hopeful they will lead you to your tail.",
+                image: 'images/star-path.jpg',
+                choices: [
+                    { text: "Sing a Song as You Go", nextScene: 15 },
+                    { text: "Walk Quietly", nextScene: 6 },
+                    { text: "Collect Sparkles", nextScene: 10 }
+                ]
+            },
+            // Scene 6
+            {
+                text: "You take a rest, gazing at the beautiful universe around you.",
+                image: 'images/resting-comet.jpg',
+                choices: [
+                    { text: "Close Your Eyes for a Moment", nextScene: 16 },
+                    { text: "Continue Your Journey", nextScene: 5 },
+                    { text: "Make a Wish", nextScene: 17 }
+                ]
+            },
+            // Scene 7
+            {
+                text: "The Moon shares ancient wisdom, guiding you toward a place where lost things are found.",
+                image: 'images/moon-advice.jpg',
+                choices: [
+                    { text: "Thank the Moon", nextScene: 8 },
+                    { text: "Head to the Place Mentioned", nextScene: 18 },
+                    { text: "Ask More Questions", nextScene: 19 }
+                ]
+            },
+            // Continue adding scenes for all nextScene references...
         ],
         locked: false
     },
@@ -85,7 +125,10 @@ function loadProgress() {
     const savedScene = localStorage.getItem('currentScene');
     if (savedChapter && gameData[savedChapter]) {
         currentChapter = savedChapter;
-        currentScene = parseInt(savedScene);
+        currentScene = parseInt(savedScene, 10) || 0;
+    } else {
+        currentChapter = 'chapter1';
+        currentScene = 0;
     }
 }
 
@@ -102,6 +145,9 @@ function showScene() {
         console.error(`Chapter "${currentChapter}" not found in gameData.`);
         return;
     }
+
+    // Log current scene index for debugging
+    console.log(`Accessing scene index: ${currentScene} in chapter: ${currentChapter}`);
 
     const scene = chapter.scenes[currentScene];
     if (!scene) {
@@ -143,7 +189,7 @@ function showScene() {
             choicesDiv.appendChild(button);
         });
     } else {
-        // No choices, end of chapter or scene
+        // No choices; end of scene or chapter
         const nextButton = document.getElementById('next-button');
         nextButton.style.display = 'block';
         nextButton.onclick = function() {
