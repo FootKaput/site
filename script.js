@@ -85,7 +85,27 @@ const gameData = {
                     { text: "Ask More Questions", nextScene: 19 }
                 ]
             },
-            // Continue adding scenes for all nextScene references...
+            // Scene 8
+            {
+                text: "You thank the Moon and continue on your journey, feeling hopeful.",
+                image: 'images/hopeful-comet.jpg',
+                choices: [
+                    { text: "Follow a Shooting Star", nextScene: 20 },
+                    { text: "Glide Toward a Nebula", nextScene: 21 },
+                    { text: "Explore a Nearby Planet", nextScene: 22 }
+                ]
+            },
+            // Scene 9
+            {
+                text: "You share a delightful story with the Moon, and both of you laugh together.",
+                image: 'images/laughing-moon.jpg',
+                choices: [
+                    { text: "Say Goodbye and Continue", nextScene: 8 },
+                    { text: "Ask for Advice", nextScene: 7 },
+                    { text: "Stay a Little Longer", nextScene: 23 }
+                ]
+            },
+            // Add more scenes as needed to cover all nextScene references
         ],
         locked: false
     },
@@ -146,9 +166,6 @@ function showScene() {
         return;
     }
 
-    // Log current scene index for debugging
-    console.log(`Accessing scene index: ${currentScene} in chapter: ${currentChapter}`);
-
     const scene = chapter.scenes[currentScene];
     if (!scene) {
         console.error(`Scene "${currentScene}" not found in chapter "${currentChapter}".`);
@@ -205,10 +222,10 @@ function unlockNextChapter() {
     const nextChapter = chapters[currentIndex + 1];
 
     if (nextChapter && gameData[nextChapter].locked) {
-        // Unlock next chapter after a delay or condition
+        // Unlock next chapter
         gameData[nextChapter].locked = false;
-        alert(`A new chapter "${gameData[nextChapter].title}" is now unlocked!`);
-        // Reset to the beginning of the new chapter
+        alert(`A new chapter, "${gameData[nextChapter].title}", is now unlocked!`);
+        // Start the next chapter
         currentChapter = nextChapter;
         currentScene = 0;
         saveProgress();
