@@ -105,26 +105,9 @@ const gameData = {
                     { text: "Stay a Little Longer", nextScene: 23 }
                 ]
             },
-            // Add more scenes as needed to cover all nextScene references
+            // Add more scenes up to at least the highest nextScene value used
         ],
         locked: false
-    },
-    chapter2: {
-        title: "Journey to Planet Rainbow",
-        scenes: [
-            // Scene 0
-            {
-                text: "A shimmering path appears, leading you to the vibrant Planet Rainbow.",
-                image: 'images/planet-rainbow.jpg',
-                choices: [
-                    { text: "Slide Down the Rainbow", nextScene: 1 },
-                    { text: "Talk to the Color Pixies", nextScene: 2 },
-                    { text: "Explore the Color Forest", nextScene: 3 }
-                ]
-            },
-            // Additional scenes...
-        ],
-        locked: true
     },
     // Additional chapters...
 };
