@@ -105,11 +105,11 @@ const gameData = {
                     { text: "Stay a Little Longer", nextScene: 23 }
                 ]
             },
-            // Add more scenes up to at least the highest nextScene value used
+            // Add additional scenes as needed to cover all nextScene references
         ],
         locked: false
     },
-    // Additional chapters...
+    // Add additional chapters as desired
 };
 
 // Game State
@@ -155,10 +155,10 @@ function showScene() {
         return;
     }
 
-    // Update Text
+    // Update Story Text
     document.getElementById('story-text').innerText = scene.text;
 
-    // Update Image
+    // Update Story Image
     if (scene.image) {
         document.getElementById('story-image').style.backgroundImage = `url('${scene.image}')`;
     } else {
@@ -168,7 +168,7 @@ function showScene() {
     // Optional: Narrate the text
     narrateText(scene.text);
 
-    // Clear Choices
+    // Clear Previous Choices
     const choicesDiv = document.getElementById('choices');
     choicesDiv.innerHTML = '';
 
@@ -189,7 +189,7 @@ function showScene() {
             choicesDiv.appendChild(button);
         });
     } else {
-        // No choices; end of scene or chapter
+        // Show Next Button if No Choices
         const nextButton = document.getElementById('next-button');
         nextButton.style.display = 'block';
         nextButton.onclick = function() {
@@ -205,10 +205,8 @@ function unlockNextChapter() {
     const nextChapter = chapters[currentIndex + 1];
 
     if (nextChapter && gameData[nextChapter].locked) {
-        // Unlock next chapter
         gameData[nextChapter].locked = false;
         alert(`A new chapter, "${gameData[nextChapter].title}", is now unlocked!`);
-        // Start the next chapter
         currentChapter = nextChapter;
         currentScene = 0;
         saveProgress();
@@ -226,7 +224,7 @@ function narrateText(text) {
     }
 }
 
-// Optionally, unlock chapters over time
+// Optionally Unlock Chapters Over Time
 function unlockChapterAfterDelay(chapterName, delayInSeconds) {
     setTimeout(() => {
         if (gameData[chapterName].locked) {
@@ -237,4 +235,4 @@ function unlockChapterAfterDelay(chapterName, delayInSeconds) {
 }
 
 // Example: Unlock Chapter 2 after 60 seconds (adjust as needed)
-unlockChapterAfterDelay('chapter2', 60);
+// unlockChapterAfterDelay('chapter2', 60);
